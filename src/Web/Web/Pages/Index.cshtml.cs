@@ -7,7 +7,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Web.Pages {
+
     public class IndexModel : PageModel {
+
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger) {
@@ -17,5 +19,18 @@ namespace Web.Pages {
         public void OnGet() {
 
         }
+
+        public async Task<IActionResult> OnPostAsync() {
+            if(!ModelState.IsValid) {
+                return Page();
+            }
+
+            /*_context.Customers.Add(Customer);
+            await _context.SaveChangesAsync();*/
+
+            return RedirectToPage("./Index");
+        }
+
     }
+
 }

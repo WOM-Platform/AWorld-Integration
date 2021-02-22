@@ -5,3 +5,4 @@
 *.csproj.user
 keys/*
 !keys/placeholder
+config.env
