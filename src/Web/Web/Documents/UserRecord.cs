@@ -19,6 +19,9 @@ namespace Web.Documents {
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime LastUpdate { get; set; }
 
+        [BsonElement("metrics")]
+        public Dictionary<int, double> Metrics { get; set; } = new Dictionary<int, double>();
+
         [BsonExtraElements]
         public BsonDocument CatchAll { get; set; }
 

@@ -8,14 +8,41 @@
     <h1 class="display-4">AWorld</h1>
     <p>Convert your climate actions from the <a href="https://aworld.org/">AWORLD platform</a> into WOM&nbsp;vouchers.</p>
 
+    @if (Model.Result != null) {
+
+        <p>@Html.Raw(Model.Result)</p>
+
+    }
+    else {
+
     <form method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+
         <div class="form-group">
             <label>
-                Insert your profile code:<br />
-                <input type="text" size="60" class="form-control" />
+                Username:<br />
+                <input type="text" asp-for="Username" size="60" class="form-control" />
+                <span asp-validation-for="Username"></span>
             </label>
         </div>
 
+        <div class="form-group">
+            <label>
+                Insert your profile code:<br />
+                <input type="text" asp-for="Secret" size="60" class="form-control" />
+                <span asp-validation-for="Secret"></span>
+            </label>
+        </div>
+
+        @if (ViewData["Error"] != null) {
+            <div class="alert alert-danger" role="alert">
+                @ViewData["Error"]
+            </div>
+        }
+
         <button type="submit" value="Redeem vouchers" class="btn btn-primary">Redeem</button>
     </form>
+
+    }
+
 </div>
