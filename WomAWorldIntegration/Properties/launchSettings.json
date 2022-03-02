@@ -10,7 +10,7 @@
   "profiles": {
     "WomAWorldIntegration": {
       "commandName": "Project",
-      "commandLineArgs": "MONGODB_CONNECTION_STRING=mongodb+srv://AWorldWOM:npvqPXp6MbQQvItI2l9l@cluster0.m4nk2.mongodb.net/myFirstDatabase?authSource=admin&replicaSet=atlas-rziita-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true",
+      "commandLineArgs": "MONGODB_CONNECTION_STRING=",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
