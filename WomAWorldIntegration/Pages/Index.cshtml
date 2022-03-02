@@ -1,0 +1,54 @@
+﻿@page "/"
+@model WomAWorldIntegration.Pages.IndexModel
+@{
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+            <h1 class="display-4">WOM for AWorld</h1>
+
+            <p class="lead">
+                Convert your climate actions tracked by the <a href="https://aworld.org/">AWorld&nbsp;platform</a> into WOM&nbsp;vouchers.
+            </p>
+
+            @if (Model.Output == null) {
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly"></div>
+
+                    <div class="form-group">
+                        <label>
+                            Username:<br />
+                            <input type="text" asp-for="UserInfo.Username" size="60" class="form-control" />
+                            <span asp-validation-for="UserInfo.Username"></span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            Insert your profile code:<br />
+                            <input type="text" asp-for="UserInfo.Secret" size="60" class="form-control" />
+                            <span asp-validation-for="UserInfo.Secret"></span>
+                        </label>
+                    </div>
+
+                    @if (Model.Error != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @Model.Error
+                </div>
+                }
+
+                <p class="text-align">
+                    <button type="submit" value="Redeem vouchers" class="btn btn-primary">Redeem your vouchers</button>
+                </p>
+                </form>
+
+            } else {
+                <p><b>Results:</b></p>
+
+                <p>@Html.Raw(Model.Output)</p>
+            }
+        </div>
+    </div>
+</div>

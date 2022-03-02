@@ -1,0 +1,29 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:20718",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "WomAWorldIntegration": {
+      "commandName": "Project",
+      "commandLineArgs": "MONGODB_CONNECTION_STRING=mongodb+srv://AWorldWOM:npvqPXp6MbQQvItI2l9l@cluster0.m4nk2.mongodb.net/myFirstDatabase?authSource=admin&replicaSet=atlas-rziita-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5091",
+      "dotnetRunMessages": true
+    },
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

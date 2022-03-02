@@ -1,0 +1,97 @@
+html b {
+    font-weight: 600;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.main-container > section {
+    flex-grow: 1;
+}
+
+.centered {
+    text-align: center;
+}
+
+.bg-subtle {
+    background-color: #e0e5ef;
+}
+
+.description {
+    font-size: 0.9em;
+}
+
+.big-form {
+    margin-top: 4rem;
+    margin-bottom: 1.5rem;
+    border-radius: 30px;
+    background: #ffffff;
+    box-shadow: 36px 36px 88px #e6e6e6, -36px -36px 88px #ffffff;
+    padding: 30px;
+}
+.big-form h1 {
+    margin-bottom: 2rem;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.form-subgroup {
+    border: solid 2px #e0e5ef;
+    padding: 1em 1em 1.5em 1em;
+    margin: 2em 0 3em 0;
+    border-radius: 15px;
+}
+
+nav.navbar .navbar-brand img {
+    height: 30px;
+    width: auto;
+}
+
+.language-switcher {
+    background: hsl(224, 25%, 95%);
+    box-shadow: 4px 4px 6px hsla(224, 60%, 20%, 0.4);
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    margin-bottom: 3em;
+    display: inline-block;
+}
+.language-switcher a, .language-switcher:visited {
+    text-decoration: underline;
+    color: black;
+}
+.language-switcher a:hover {
+    text-decoration: underline;
+    color: black;
+}
+.language-switcher a.current {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+footer {
+    padding-bottom: 2em;
+    padding-top: 2em;
+    margin-top: 3em;
+    background-color: #e0e5ef;
+}
+
+.badge {
+    text-align: center;
+    vertical-align: middle;
+    font-style: italic;
+}
+.badge a {
+    border: 0;
+    text-decoration: none;
+}
+.badge img {
+    max-width: 50%;
+    height: auto;
+}
+
+.badge img.off {
+    opacity: 0.5;
+}

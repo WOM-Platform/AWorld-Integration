@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <title>@if(ViewData["Title"] != null) { @(ViewData["Title"] + " | ") }WOM for AWorld</title>
+
+        <meta name="description" content="WOM is general-purpose rewarding platform based on a voucher exchange system." />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="~/raleway.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/bootstrap.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/style.css" asp-append-version="true" />
+    </head>
+
+    <body>
+        <div class="main-container">
+            @if (IsSectionDefined("header")) {
+            <header>
+                @RenderSection("header")
+            </header>
+            }
+            else
+            {
+            <header>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+                            <a asp-page="~/Index.cshtml">
+                                <img src="~/wom-logo.png" alt="WOM logo" class="img-fluid" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            }
+
+            <section>
+                @RenderBody()
+            </section>
+
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>WOM&nbsp;Platform&nbsp;&mdash;&nbsp;@DateTime.UtcNow.Year</p>
+                            <p><a href="https://wom.social">Privacy policy</a></p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script src="~/jquery-3.4.1.slim.min.js" asp-append-version="true"></script>
+        <script src="~/popper-1.16.0.min.js" asp-append-version="true"></script>
+        <script src="~/bootstrap-4.4.1.min.js" asp-append-version="true"></script>
+    </body>
+</html>
