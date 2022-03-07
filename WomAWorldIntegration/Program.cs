@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Net.Http.Headers;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,8 @@ builder.Services.AddSingleton<HttpClient>(provider =>
     client.DefaultRequestHeaders.Add(HeaderNames.UserAgent, "WOMConnector/1.0");
     return client;
 });
+builder.Services.AddDataProtection()
+    .PersistKeysToGoogleCloudStorage(Environment.GetEnvironmentVariable("GCLOUD_STORAGE_KEY_BUCKET"), "AWorld-DataProtectionKeys.xml");
 
 var app = builder.Build();
 

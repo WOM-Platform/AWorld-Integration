@@ -10,20 +10,25 @@
   "profiles": {
     "WomAWorldIntegration": {
       "commandName": "Project",
-      "commandLineArgs": "MONGODB_CONNECTION_STRING=",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "GOOGLE_PROJECT_ID": "",
+        "GOOGLE_APPLICATION_CREDENTIALS": "",
+        "GCLOUD_STORAGE_KEY_BUCKET": "",
+        "MONGODB_CONNECTION_STRING": ""
       },
       "applicationUrl": "http://localhost:5091",
       "dotnetRunMessages": true
     },
-    "IIS Express": {
-      "commandName": "IISExpress",
+    "Local private": {
+      "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+        "ASPNETCORE_ENVIRONMENT": "Development",
+      },
+      "applicationUrl": "http://localhost:5091",
+      "dotnetRunMessages": true
     }
   }
 }
