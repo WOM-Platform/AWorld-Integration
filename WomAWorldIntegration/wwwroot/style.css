@@ -34,6 +34,11 @@ html b {
     margin-bottom: 2rem;
 }
 
+.field-validation-error {
+    font-size: 0.9em;
+    color: #721c24;
+    font-weight: bold;
+}
 .validation-summary-valid {
     display: none;
 }

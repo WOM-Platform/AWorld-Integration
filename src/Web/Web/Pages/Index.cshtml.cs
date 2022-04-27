@@ -43,10 +43,17 @@ namespace Web.Pages {
                 return Page();
             }
 
+            _logger.LogInformation("Processing username {0}", Username);
+
             var decoded = Encoding.ASCII.GetString(Convert.FromBase64String(Secret));
             var parts = decoded.Split(' ');
             if(parts.Length != 2) {
                 ModelState.AddModelError(nameof(Secret), $"Secret could not be decoded ({parts.Length} parts)");
+                _logger.LogWarning("Could not decode secret into two parts");
+            }
+
+            if(!ModelState.IsValid) {
+                return Page();
             }
 
             try {
@@ -54,15 +61,19 @@ namespace Web.Pages {
 
                 // Verification
                 if(!parts[1].Equals(profile.Ctx.Profile.User.Sub, StringComparison.InvariantCultureIgnoreCase)) {
+                    _logger.LogError("Secret sub does not match profile sub");
+
                     ViewData["Error"] = "Secret sub does not match profile sub.";
                     return Page();
                 }
 
-                var token = new JsonWebToken(profile.Ctx.Profile.User.Signature);
+                /*var token = new JsonWebToken(profile.Ctx.Profile.User.Signature);
                 if(!parts[1].Equals(token.Subject, StringComparison.InvariantCultureIgnoreCase)) {
+                    _logger.LogError("Secret sub does not match profile signature");
+
                     ViewData["Error"] = "Secret sub does not match profile signature.";
                     return Page();
-                }
+                }*/
 
                 var sb = new StringBuilder();
                 sb.Append($"Profile {profile.Ctx.Username} of {profile.Ctx.Profile.User.FirstName} {profile.Ctx.Profile.User.LastName}.<br />");
@@ -75,6 +86,8 @@ namespace Web.Pages {
                 return Page();
             }
             catch(Exception ex) {
+                _logger.LogError(ex, "Unable to process: {0}", ex.Message);
+
                 ViewData["Error"] = $"Unable to fetch user profile ({ex.Message}).";
                 return Page();
             }

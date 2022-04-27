@@ -32,12 +32,12 @@
                         </label>
                     </div>
 
-                    @if (Model.Error != null)
+                    @if (Model.Error != null || !Model.ModelState.IsValid)
                     {
                         <div class="alert alert-danger" role="alert">
-                            @Model.Error
-                </div>
-                }
+                            @(Model.Error ?? "One or more input fields are invalid.")
+                        </div>
+                    }
 
                 <p class="text-align">
                     <button type="submit" value="Redeem vouchers" class="btn btn-primary">Redeem your vouchers</button>

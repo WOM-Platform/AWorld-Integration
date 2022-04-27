@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Text;
 using WomAWorldIntegration.Models;
 
 namespace WomAWorldIntegration.Pages
@@ -39,16 +38,15 @@ namespace WomAWorldIntegration.Pages
 
             _logger.LogInformation("Processing username {0}", UserInfo?.Username);
 
-            /*
-            var decoded = Encoding.ASCII.GetString(Convert.FromBase64String(UserInfo?.Secret ?? string.Empty));
-            var parts = decoded.Split(' ');
-            if (parts.Length != 2)
+            if(string.IsNullOrWhiteSpace(UserInfo?.Username))
             {
-                ModelState.AddModelError(nameof(UserInfo.Secret), "Secret could not be decoded");
-                _logger.LogWarning("Could not decode secret (has {0} parts)", parts.Length);
+                ModelState.AddModelError(nameof(UserInfo) + "." + nameof(UserInfo.Username), "Username cannot be empty");
             }
-            */
-
+            if(!Guid.TryParseExact(UserInfo?.Secret ?? string.Empty, "D", out Guid secretId))
+            {
+                ModelState.AddModelError(nameof(UserInfo) + "." + nameof(UserInfo.Secret), "Secret is not valid");
+                _logger.LogWarning("Could not parse secret as GUID");
+            }
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -56,17 +54,18 @@ namespace WomAWorldIntegration.Pages
 
             try
             {
-                var profile = await _http.GetFromJsonAsync<UserProfile>($"https://aworld.org/u/{UserInfo.Username}?lang=en&format=json");
+                var profile = await _http.GetFromJsonAsync<UserProfile>($"https://aworld.org/u/{UserInfo.Username}?format=json");
 
                 // Verification
-                /*if (!parts[1].Equals(profile?.Ctx?.Profile?.User?.Sub, StringComparison.InvariantCultureIgnoreCase))
+                if(profile?.Ctx?.Profile?.User?.Sub != secretId)
                 {
-                    _logger.LogError("Secret sub does not match profile sub");
+                    _logger.LogError("Secret ID does not match profile sub");
 
-                    Error = "Secret sub does not match profile sub.";
+                    Error = "The secret does not match your profile.";
                     return Page();
-                }*/
+                }
 
+                /*
                 var sb = new StringBuilder();
                 sb.Append($"Profile {profile.Ctx.Username} of {profile.Ctx.Profile.User.FirstName} {profile.Ctx.Profile.User.LastName}.<br />");
                 sb.Append("Metrics:<br />");
@@ -76,6 +75,9 @@ namespace WomAWorldIntegration.Pages
                 }
                 _logger.LogInformation("Results: {0}", sb.ToString());
                 Output = sb.ToString();
+                */
+
+                Output = "Everything correct";
 
                 return Page();
             }
