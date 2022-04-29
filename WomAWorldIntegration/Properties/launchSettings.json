@@ -16,7 +16,8 @@
         "GOOGLE_PROJECT_ID": "",
         "GOOGLE_APPLICATION_CREDENTIALS": "",
         "GCLOUD_STORAGE_KEY_BUCKET": "",
-        "MONGODB_CONNECTION_STRING": ""
+        "MONGODB_CONNECTION_STRING": "",
+        "WOM_DOMAIN": ""
       },
       "applicationUrl": "http://localhost:5091",
       "dotnetRunMessages": true

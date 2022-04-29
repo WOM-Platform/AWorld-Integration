@@ -18,6 +18,17 @@ html b {
     background-color: #e0e5ef;
 }
 
+.voucher-count {
+    font-weight: bold;
+}
+
+.tooltip-link {
+    color: rgb(33, 37, 41);
+    text-decoration: underline;
+    text-decoration-style: dashed;
+    font-weight: bold;
+}
+
 .description {
     font-size: 0.9em;
 }

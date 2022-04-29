@@ -27,7 +27,7 @@
                 <div class="container">
                     <div class="row justify-content-center">
                         <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-                            <a asp-page="~/Index.cshtml">
+                            <a asp-page="/Index">
                                 <img src="~/wom-logo.png" alt="WOM logo" class="img-fluid" />
                             </a>
                         </div>
@@ -55,5 +55,10 @@
         <script src="~/jquery-3.4.1.slim.min.js" asp-append-version="true"></script>
         <script src="~/popper-1.16.0.min.js" asp-append-version="true"></script>
         <script src="~/bootstrap-4.4.1.min.js" asp-append-version="true"></script>
+        <script>
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+})
+        </script>
     </body>
 </html>

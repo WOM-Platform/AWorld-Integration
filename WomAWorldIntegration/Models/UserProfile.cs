@@ -22,6 +22,10 @@ namespace WomAWorldIntegration.Models
             public MetricEntry[]? Metrics { get; set; }
 
             public int Activations { get; set; }
+
+            public int Actions { get; set; }
+
+            public LevelEntry Level { get; set; }
         }
 
         public class UserSection
@@ -44,7 +48,15 @@ namespace WomAWorldIntegration.Models
             public string? Name { get; set; }
 
             [JsonPropertyName("real_amount")]
-            public double Amount { get; set; }
+            public decimal Amount { get; set; }
+        }
+
+        public class LevelEntry
+        {
+            public string Name { get; set; }
+
+            [JsonPropertyName("level_index")]
+            public int Index { get; set; }
         }
     }
 }

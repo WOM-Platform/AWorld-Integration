@@ -1,0 +1,44 @@
+﻿@page "/reward"
+@model WomAWorldIntegration.Pages.ShowPrizeModel
+@{
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+            <h1 class="display-4">WOM for AWorld</h1>
+
+            @if(Model.AmountOfVouchers > 0)
+            {
+                <p class="lead">
+                    <b>Congratulations!</b> You have earned
+                    <span class="voucher-count">@Model.AmountOfVouchers</span>
+                    WOM&nbsp;vouchers.
+                </p>
+
+                <p>
+                    Please scan the QR&nbsp;Code below using the <a href="https://wom.social/volunteer"><b>WOM&nbsp;Pocket</b> application</a>.
+                    Use the <i>Password&nbsp;code</i> just below when the application asks for it.
+                </p>
+
+                <p class="text-center qrcode">
+                    <a href="@Model.WomUrl">
+                        <img src="https://@(Environment.GetEnvironmentVariable("WOM_DOMAIN"))/api/render/qrcode?url=@Model.WomUrl" alt="Code" class="img-fluid" />
+                    </a>
+
+                    <h3 class="text-center">Password: @Model.WomPassword</h3>
+                </p>
+            } else
+            {
+                <p class="lead">
+                    Keep logging your habits and following AWorld!
+                </p>
+
+                <p>
+                    You have not earned any WOM&nbsp;vouchers for now, but you will as soon as you reach a new level within the app.
+                </p>
+            }
+            
+        </div>
+    </div>
+</div>

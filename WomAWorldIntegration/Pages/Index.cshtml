@@ -12,43 +12,36 @@
                 Convert your climate actions tracked by the <a href="https://aworld.org/">AWorld&nbsp;platform</a> into WOM&nbsp;vouchers.
             </p>
 
-            @if (Model.Output == null) {
-                <form method="post">
-                    <div asp-validation-summary="ModelOnly"></div>
+            <form method="post">
+                <div asp-validation-summary="ModelOnly"></div>
 
-                    <div class="form-group">
-                        <label>
-                            Username:<br />
-                            <input type="text" asp-for="UserInfo.Username" size="60" class="form-control" />
-                            <span asp-validation-for="UserInfo.Username"></span>
-                        </label>
+                <div class="form-group">
+                    <label>
+                        Your <a href="#" class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Your username is written below your full name on the app’s Profile page.">Username</a>:<br />
+                        <input type="text" asp-for="UserInfo.Username" size="60" class="form-control" />
+                        <span asp-validation-for="UserInfo.Username"></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        Your <a href="#" class="tooltip-link" data-toggle="tooltip" data-placement="top" title="Access the app’s settings → Privacy Agreement → Copy User Identifier.">User Identifier</a>:<br />
+                        <input type="text" asp-for="UserInfo.Secret" size="60" class="form-control" />
+                        <span asp-validation-for="UserInfo.Secret"></span>
+                    </label>
+                </div>
+
+                @if (Model.Error != null || !Model.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger" role="alert">
+                        @(Model.Error ?? "One or more input fields are invalid.")
                     </div>
+                }
 
-                    <div class="form-group">
-                        <label>
-                            Insert your profile code:<br />
-                            <input type="text" asp-for="UserInfo.Secret" size="60" class="form-control" />
-                            <span asp-validation-for="UserInfo.Secret"></span>
-                        </label>
-                    </div>
-
-                    @if (Model.Error != null || !Model.ModelState.IsValid)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @(Model.Error ?? "One or more input fields are invalid.")
-                        </div>
-                    }
-
-                <p class="text-align">
-                    <button type="submit" value="Redeem vouchers" class="btn btn-primary">Redeem your vouchers</button>
-                </p>
-                </form>
-
-            } else {
-                <p><b>Results:</b></p>
-
-                <p>@Html.Raw(Model.Output)</p>
-            }
+            <p class="text-align">
+                <button type="submit" value="Redeem vouchers" class="btn btn-primary">Redeem your vouchers</button>
+            </p>
+            </form>
         </div>
     </div>
 </div>
