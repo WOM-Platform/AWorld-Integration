@@ -120,8 +120,8 @@ namespace WomAWorldIntegration.Pages
                         }
                     });
                 }
-                
-                await _mongo.RegisterPrize(new Documents.Prize
+
+                var newPrize = new Documents.Prize
                 {
                     UserId = existingUser.Id,
                     Username = existingUser.Username,
@@ -131,9 +131,13 @@ namespace WomAWorldIntegration.Pages
                     AmountOfVouchers = amountOfVouchers,
                     WomUrl = response?.Link,
                     WomPassword = response?.Password,
-                });
+                };
+                await _mongo.RegisterPrize(newPrize);
 
-                return Page();
+                return RedirectToPage("ShowPrize", new
+                {
+                    Pid = newPrize.Id.ToString(),
+                });
             }
             catch (Exception ex)
             {
