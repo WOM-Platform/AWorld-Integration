@@ -98,7 +98,7 @@ namespace WomAWorldIntegration
         {
             var filter = Builders<Prize>.Filter.And(
                 Builders<Prize>.Filter.Eq(p => p.UserId, userId),
-                Builders<Prize>.Filter.Gt(p => p.CreatedOn, DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(5)))
+                Builders<Prize>.Filter.Gt(p => p.CreatedOn, DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(3)))
             );
 
             return await PrizeCollection.Find(filter).SortByDescending(p => p.CreatedOn).FirstOrDefaultAsync();

@@ -74,10 +74,12 @@ namespace WomAWorldIntegration.Pages
                     return Page();
                 }
 
-                bool newProfilePrize = false;
+                bool newProfilePrize;
                 var existingUser = await _mongo.GetUserByUsername(UserInfo.Username);
                 if(existingUser == null)
                 {
+                    _logger.LogDebug("User not found, creating new profile");
+
                     newProfilePrize = true;
                     existingUser = new Documents.User
                     {
@@ -87,12 +89,21 @@ namespace WomAWorldIntegration.Pages
                         CreatedOn = DateTime.UtcNow,
                     };
                 }
-                _logger.LogDebug("Profile loaded, new profile reward {0}", newProfilePrize);
+                else
+                {
+                    _logger.LogDebug("Existing user found, last updated on {0}", existingUser.LastModifiedOn);
 
-                // Check for existing prize, to fix double-clicks
+                    newProfilePrize = false;
+                    existingUser.LastModifiedOn = DateTime.UtcNow;
+                }
+
+                // Check for existing prize, to prevent double-clicks
                 var existingPrize = await _mongo.GetSafetyPrize(existingUser.Id);
                 if(existingPrize != null)
                 {
+                    _logger.LogDebug("There is a recent reward with ID {1} ({0} s ago), redirecting",
+                        (DateTime.UtcNow - existingPrize.CreatedOn).TotalSeconds, existingPrize.Id);
+
                     return RedirectToPage("ShowPrize", new
                     {
                         Pid = existingPrize.Id.ToString(),
@@ -115,7 +126,8 @@ namespace WomAWorldIntegration.Pages
 
                 // Process reward
                 var amountOfVouchers = GetVoucherCount(newProfilePrize, previousLevelIndex, existingUser.CurrentLevelIndex);
-                
+                _logger.LogInformation("Assigning {0} vouchers to user", amountOfVouchers);
+
                 VoucherRequest response = null;
                 if(amountOfVouchers > 0)
                 {

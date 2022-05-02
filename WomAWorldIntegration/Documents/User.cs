@@ -15,6 +15,9 @@ namespace WomAWorldIntegration.Documents
 
         public DateTime CreatedOn { get; set; }
 
+        [BsonIgnoreIfNull]
+        public DateTime? LastModifiedOn { get; set; }
+
         public decimal SavedCo2 { get; set; }
 
         public decimal SavedWater { get; set; }
