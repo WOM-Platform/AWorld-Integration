@@ -89,6 +89,16 @@ namespace WomAWorldIntegration.Pages
                 }
                 _logger.LogDebug("Profile loaded, new profile reward {0}", newProfilePrize);
 
+                // Check for existing prize, to fix double-clicks
+                var existingPrize = await _mongo.GetSafetyPrize(existingUser.Id);
+                if(existingPrize != null)
+                {
+                    return RedirectToPage("ShowPrize", new
+                    {
+                        Pid = existingPrize.Id.ToString(),
+                    });
+                }
+
                 // Update profile
                 int previousLevelIndex = existingUser.CurrentLevelIndex;
 
@@ -169,9 +179,11 @@ namespace WomAWorldIntegration.Pages
 
         private int GetVoucherCount(bool newProfilePrize, int previousLevel, int currentLevel)
         {
+            var leafDifference = Math.Max(GetLeavesForLevel(currentLevel) - GetLeavesForLevel(previousLevel), 0);
+
             return
                 (newProfilePrize ? 10 : 0) + // Bonus 10 vouchers for new profile
-                (int)Math.Ceiling((GetLeavesForLevel(currentLevel) - GetLeavesForLevel(previousLevel)) / 50.0) // 1 voucher per 50 additional leaves
+                (int)Math.Ceiling(leafDifference / 50.0) // 1 voucher per 50 additional leaves
             ;
         }
     }

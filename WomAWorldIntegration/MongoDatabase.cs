@@ -93,5 +93,15 @@ namespace WomAWorldIntegration
 
             return await PrizeCollection.Find(Builders<Prize>.Filter.Eq(p => p.Id, id)).SingleOrDefaultAsync();
         }
+
+        public async Task<Prize> GetSafetyPrize(ObjectId userId)
+        {
+            var filter = Builders<Prize>.Filter.And(
+                Builders<Prize>.Filter.Eq(p => p.UserId, userId),
+                Builders<Prize>.Filter.Gt(p => p.CreatedOn, DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(5)))
+            );
+
+            return await PrizeCollection.Find(filter).SingleOrDefaultAsync();
+        }
     }
 }
