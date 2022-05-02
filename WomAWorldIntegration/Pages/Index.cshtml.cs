@@ -102,10 +102,10 @@ namespace WomAWorldIntegration.Pages
                 // Update profile
                 int previousLevelIndex = existingUser.CurrentLevelIndex;
 
-                existingUser.SavedCo2 = profile.Ctx.Profile.Metrics.Where(m => "Co2".Equals(m.Name, StringComparison.InvariantCultureIgnoreCase)).First().Amount;
-                existingUser.SavedWater = profile.Ctx.Profile.Metrics.Where(m => "Water".Equals(m.Name, StringComparison.InvariantCultureIgnoreCase)).First().Amount;
-                existingUser.SavedEnergy = profile.Ctx.Profile.Metrics.Where(m => "Energy".Equals(m.Name, StringComparison.InvariantCultureIgnoreCase)).First().Amount;
-                existingUser.ActsOfLove = profile.Ctx.Profile.Metrics.Where(m => "Love".Equals(m.Name, StringComparison.InvariantCultureIgnoreCase)).First().Amount;
+                existingUser.SavedCo2 = profile.Ctx.Profile.Metrics.Where(m => m.Id == 2).Single().Amount;
+                existingUser.SavedWater = profile.Ctx.Profile.Metrics.Where(m => m.Id == 1).Single().Amount;
+                existingUser.SavedEnergy = profile.Ctx.Profile.Metrics.Where(m => m.Id == 4).Single().Amount;
+                existingUser.ActsOfLove = profile.Ctx.Profile.Metrics.Where(m => m.Id == 5).Single().Amount;
                 existingUser.ActionsCount = profile.Ctx.Profile.Actions;
                 existingUser.CurrentLevelIndex = profile.Ctx.Profile.Level.Index;
 

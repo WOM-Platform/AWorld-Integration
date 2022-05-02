@@ -101,7 +101,7 @@ namespace WomAWorldIntegration
                 Builders<Prize>.Filter.Gt(p => p.CreatedOn, DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(5)))
             );
 
-            return await PrizeCollection.Find(filter).SingleOrDefaultAsync();
+            return await PrizeCollection.Find(filter).SortByDescending(p => p.CreatedOn).FirstOrDefaultAsync();
         }
     }
 }
