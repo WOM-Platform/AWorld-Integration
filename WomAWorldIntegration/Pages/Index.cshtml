@@ -48,7 +48,9 @@
 
 <script>
 function killButton() {
-  document.querySelector('#btnRedeem').disabled = true;
+  setTimeout(() {
+      document.querySelector('#btnRedeem').disabled = true;
+  }, 1);
 }
 
 document.querySelector('#formRedeem').addEventListener('submit', function(ev) {
